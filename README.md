@@ -88,3 +88,4 @@ page {
 	height: 100%;
 }
 ```
+17. *wx.createSelectorQuery()* 是异步的，所以 *boundingClientRect* 中获取到的信息，需要在其回调函数中进行后续操作。
