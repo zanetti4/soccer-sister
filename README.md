@@ -53,3 +53,38 @@ if (data.data){
 12. 两个数字字符串之间如何比较？  
 **解决办法：**  
 把其中一个转换为数字，再比较，否则 '9'>'11'，因为只比较第一位。
+13. 跳转页面时如何传递数据？  
+**解决办法：**  
+字符串数据中如果含有 ? = &，需要先进行转换。如果要传递的数据是数组或对象，则先用 *JSON.stringify()* 转换为字符串，在目标页的 *options* 中拿到后，用 *JSON.parse()* 解析后再使用。
+14. 如何渲染 *html* 格式内容？  
+**解决办法：**  
+使用 *wxParse* 插件。
+15. 如何修改 *button* 组件的样式？  
+**解决办法：**  
+```css
+button::after {
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  border: none;
+}
+```
+另外，当 button 组件和其它可以点击的组件并排时，保留默认的**相对定位**。如果改为静态，那么点击右侧组件时，依然会触发 button 事件。  
+16. 如何阻止页面滚动？  
+**解决办法：**  
+页面结构：
+```bash
+<scroll-view class='container' scroll-y="{{!isShowShare}}">页面的静态定位内容</scroll-view>
+```
+设置样式：
+```css
+page {
+	padding: 20rpx 20rpx 80rpx;
+	width: auto;
+	height: 100%;
+	box-sizing: border-box;
+	overflow-y: hidden;
+}
+.container {
+	height: 100%;
+}
+```
