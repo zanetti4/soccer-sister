@@ -89,3 +89,9 @@ page {
 }
 ```
 17. *wx.createSelectorQuery()* 是异步的，所以 *boundingClientRect* 中获取到的信息，需要在其回调函数中进行后续操作。
+18. *app.less* 的样式不能应用于组件，要在组件自己的样式文件中写。
+19. 如何把 html 实体（&\#26368;）转换为汉字？  
+**解决办法：**  
+```javascript
+String.fromCharCode(26368, 26032); //'最新'
+```
