@@ -90,10 +90,23 @@ page {
 ```
 17. *wx.createSelectorQuery()* 是异步的，所以 *boundingClientRect* 中获取到的信息，需要在其回调函数中进行后续操作。
 18. *app.less* 的样式不能应用于组件，要在组件自己的样式文件中写。
-19. 如何把 html 实体（&\#26368;）转换为汉字？  
+19. 一段话中包含 html 实体汉字（&\#26368;），如何进行转换？  
 **解决办法：**  
 ```javascript
-String.fromCharCode(26368, 26032); //'最新'
+let sentence = '&#22914;&#65306;1:0&#65307;'; //如：1:0；
+let reEntity = /&#\d{5};/g;
+let hasEntity = reEntity.test(sentence);
+
+if(hasEntity){
+	//包含 html 实体
+	let result = sentence.replace(reEntity, entity => {
+		let num = entity.substr(2, 5);
+
+		return String.fromCharCode(num);
+	});
+
+	console.log(result); //如：1:0；
+}
 ```
 20. 默认字号和行高设置为多少比较合适？  
 **解决办法：**  
