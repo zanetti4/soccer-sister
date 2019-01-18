@@ -1,0 +1,43 @@
+<!--client/pages/allComs/allComs.wxml-->
+<view class='allReply'>精彩评论</view>
+<view class='allReplyWrap'>
+  <view class='comeach' wx:for="{{goodComs}}" wx:key="{{commId}}">
+    <view class='comeach-top'>
+      <image src='{{item.userheadPic}}' mode='aspectFit' />
+      <view class='comeach-top-cen'>
+        <text>{{item.userNickName}}</text>
+        {{item.createTime}}
+      </view>
+      <view class='comeach-top-like'>
+        {{item.likeNum}}<i class="iconfont icon-icon-test"></i>
+      </view>
+    </view>
+    <view>
+      <text decode='{{true}}'>{{item.commContent}}</text>
+    </view>
+    <com-img com-list="{{item.commImgList}}"></com-img>
+    <text class='comeach-reply' wx:if="{{item.replyNum}}" catch:tap="onToSingleCom" data-com-id='{{item.commId}}'>共{{item.replyNum}}条回复 ></text>
+  </view>
+</view>
+<view class='separate'></view>
+<view class='allReply'>全部评论（{{commentNum}}）</view>
+<view class='allReplyWrap'>
+  <view class='comeach' wx:for="{{commentList}}" wx:key="{{commId}}">
+    <view class='comeach-top'>
+      <image src='{{item.userheadPic}}' mode='aspectFit' />
+      <view class='comeach-top-cen'>
+        <text>{{item.userNickName}}</text>
+        {{item.createTime}}
+      </view>
+      <view class='comeach-top-like'>
+        {{item.likeNum}}<i class="iconfont icon-icon-test"></i>
+      </view>
+    </view>
+    <view>
+      <text decode='{{true}}'>{{item.commContent}}</text>
+    </view>
+    <com-img com-list="{{item.commImgList}}"></com-img>
+    <text class='comeach-reply' wx:if="{{item.replyNum}}" catch:tap="onToSingleCom" data-com-id='{{item.commId}}'>共{{item.replyNum}}条回复 ></text>
+  </view>
+</view>
+<view class='end' wx:if="{{isShowInfinity}}">{{infinity}}</view>

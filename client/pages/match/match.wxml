@@ -1,0 +1,195 @@
+<!--client/pages/match/match.wxml-->
+<wxs src="../../utils/tool.wxs" module="tool"></wxs>
+<import src="../../common/components/radar/radar.wxml" />
+<import src="match-template.wxml" />
+
+<view class='top' wx:if="{{tool.createMatchDate(matchData.baseinfo.startTime)}}">
+  <view class='top-bg'></view>
+  <view class='top-con'>
+    <view class='top-con-team'>
+      <image src='{{matchData.baseinfo.home.teamLogo}}' />
+      <view>{{matchData.baseinfo.home.teamName}}</view>
+    </view>
+    <view class='top-con-cen'>
+      <text class='top-con-cen-tit'>{{title}}</text><text class='color-5c4' wx:if="{{status === '1'}}" space='nbsp'> ({{matchData.baseinfo.playTimeStr ? matchData.baseinfo.playTimeStr : matchData.baseinfo.periodStr}})</text>
+      <view class='top-con-cen-line'></view>
+      <block wx:if="{{status !== '1'}}">{{tool.createMatchDate(matchData.baseinfo.startTime) + ' ' + tool.createMatchTime(matchData.baseinfo.startTime)}}</block>
+      <view class='top-con-cen-left' wx:if="{{status === '0'}}">
+        剩余 <text>{{day}}</text> 天 <text>{{hour}}</text> 小时 <text>{{minute}}</text> 分 <text>{{second}}</text> 秒
+      </view>
+      <!-- 基础库低于 1.6.0 -->
+      <audio id='goal' src='http://fjlt.sc.chinaz.com/Files/DownLoad/sound1/201507/6161.wav' binderror='onAudioError' class='d-n'></audio>
+      <view class='top-con-cen-sound' wx:if="{{status === '1'}}">
+        进球提示音<switch color='#F2708C' checked bindchange='onSound' />
+      </view>
+      <view class='top-con-cen-scores {{status === "1" ? "top-con-cen-lives" : ""}}' wx:if="{{status !== '0'}}">
+        <text class='top-con-cen-scores-num'>{{matchData.baseinfo.home.score}}</text>
+        <text class='top-con-cen-scores-colon'>:</text>
+        <text class='top-con-cen-scores-num'>{{matchData.baseinfo.guest.score}}</text>
+      </view>
+    </view>
+    <view class='top-con-team'>
+      <image src='{{matchData.baseinfo.guest.teamLogo}}' />
+      <view>{{matchData.baseinfo.guest.teamName}}</view>
+    </view>
+  </view>
+</view>
+<view class='tab'>
+  <view>
+    <text class='{{currentTab === 0 ? "tab-ac" : ""}}' data-current='{{0}}' catch:tap="clickTab">赛事数据</text><text class='{{currentTab === 1 ? "tab-ac" : ""}}' data-current='{{1}}' catch:tap="clickTab">相关资讯</text>
+  </view>
+</view>
+<swiper current='{{currentTab}}' style='height: {{swiperHeight1}}px' bindchange='swiperTab'>
+  <swiper-item>
+    <scroll-view scroll-y="{{true}}" style='height: {{swiperHeight1}}px'>
+      <block wx:if="{{status !== '0' && isShowDataC}}"> 
+        <text class='subt lineh-3'>数据对比</text>
+        <view class='dataContrast'>
+          <view class='dataContrast-item'>
+            <template is="homeData" data="{{homeData: goalHome}}"></template>
+            <text class='dataContrast-item-tit'>进球</text>
+            <template is="guestData" data="{{guestData: goalGuest}}"></template>
+          </view>
+          <view class='dataContrast-item'>
+            <template is="homeData" data="{{homeData: assistHome}}"></template>
+            <text class='dataContrast-item-tit'>助攻</text>
+            <template is="guestData" data="{{guestData: assistGuest}}"></template>
+          </view>
+          <view class='dataContrast-item'>
+            <template is="homeData" data="{{homeData: stealHome}}"></template>
+            <text class='dataContrast-item-tit'>抢断</text>
+            <template is="guestData" data="{{guestData: stealGuest}}"></template>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{status !== '0' && matchData.statistics.length}}">
+        <text class='subt lineh-3'>技术统计</text>
+        <view class='king'>
+          <view class='control'>
+            <view class='control-home ta-r'>
+              {{matchData.statistics[0].home}}
+              <view>{{matchData.baseinfo.home.teamName}}</view>
+            </view>
+            <view class='control-canvas'>
+              <canvas canvas-id="control" />
+            </view>
+            <view class='control-home'>
+              {{matchData.statistics[0].guest}}
+              <view>{{matchData.baseinfo.guest.teamName}}</view>
+            </view>
+          </view>
+          <view class='statItem' wx:for="{{statProgress}}" wx:key="{{name}}">
+            <view class='statItem-home'>
+              <view class='statItem-home-bg'>
+                <view style='width: {{item.homePercent}}; background-color: {{item.homeMore ? "#F2708C" : "#D6D6D6"}}'></view>
+              </view>
+              <text>{{item.home}}</text>
+            </view>
+            <view class='statItem-field'>{{item.name}}</view>
+            <view class='statItem-home'>
+              <text>{{item.guest}}</text>
+              <view class='statItem-guest-bg'>
+                <view style='width: {{item.guestPercent}}; background-color: {{item.guestMore ? "#F2708C" : "#D6D6D6"}}'></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{status !== '0' && formation.homeFirst.length}}">
+        <text class='subt lineh-3'>两队球员</text>
+        <view class='dataContrast'>
+          <view class='playersTop'>
+            {{matchData.baseinfo.home.teamName}}<image src='{{matchData.baseinfo.home.teamLogo}}' />首发<switch color='#F2708C' bindchange='onFormation' />替补<image src='{{matchData.baseinfo.guest.teamLogo}}' />{{matchData.baseinfo.guest.teamName}}
+          </view>
+          <view class='playersForma' wx:if="{{!isShowSub}}">
+            <view class='playersForma-team'> 
+              <view wx:for="{{formation.homeFirst}}" wx:key="{{playerId}}">
+                <text class='playersForma-team-num'>{{item.playerNum}}</text>
+                <text class='playersForma-team-posi' style='color: {{item.color}}'>{{item.positionName}}</text>
+                <text class='playersForma-team-name'>{{item.playerName}}</text>
+              </view>
+            </view>
+            <view class='playersForma-team'>
+              <view class='playersForma-team-guest' wx:for="{{formation.guestFirst}}" wx:key="{{playerId}}">
+                <text class='playersForma-team-nameGuest'>{{item.playerName}}</text>
+                <text class='playersForma-team-posiGuest' style='color: {{item.color}}'>{{item.positionName}}</text>
+                <text class='playersForma-team-num'>{{item.playerNum}}</text>
+              </view>
+            </view>
+          </view>
+          <view class='playersForma' wx:else>
+            <view class='playersForma-team'>
+              <view wx:for="{{matchData.matchPlayers.home.sub}}" wx:key="{{playerId}}">
+                <text class='playersForma-team-num'>{{item.playerNum}}</text>
+                <text class='playersForma-team-nameSub'>{{item.playerName}}</text>
+              </view>
+            </view>
+            <view class='playersForma-team'>
+              <view class='playersForma-team-guest' wx:for="{{matchData.matchPlayers.guest.sub}}" wx:key="{{playerId}}">
+                <text class='playersForma-team-nameGuestSub'>{{item.playerName}}</text>
+                <text class='playersForma-team-num'>{{item.playerNum}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{homeShoot}}">
+        <text class='subt'>球队对比</text>
+        <template is="radar" data="{{home: matchData.baseinfo.home.teamName, guest: matchData.baseinfo.guest.teamName, homeShoot}}" wx:if="{{matchData.baseinfo.home.teamName}}" />
+      </block>
+      <block wx:if="{{isShowKing && homeKing.length}}">
+        <text class='subt lineh-3'>数据王</text>
+        <view class='king' wx:if="{{homeKing.length}}">
+          <template is="kingTeam" data="{{teamLogo: matchData.baseinfo.home.teamLogo, kings: homeKing}}"></template>
+          <view class='king-kind'>
+            <text>进球王</text>
+            <text>助攻王</text>
+            <text>拦截王</text>
+          </view>
+          <template is="kingTeam" data="{{teamLogo: matchData.baseinfo.guest.teamLogo, kings: guestKing}}"></template>
+        </view>
+      </block>
+      <block wx:if="{{history.gamehistory.list}}">
+        <text class='subt'>近期交战</text>
+        <view class='king'>
+          <view class='gamehr' wx:for="{{history.gamehistory.list}}" wx:key="{{matchDate}}">
+            <text class='gamehr-date'>{{item.matchDate}}</text>
+            <view class='gamehr-game'>
+              <text space='nbsp'>{{item.homeTeamName}} </text><image src="http://image.suning.cn/uimg/SDSP/team/{{item.homeTeamId}}.png" />
+              <text class='gamehr-game-scores'>
+                <text class='{{item.homeTeamScore > item.guestTeamScore ? "color-3" : ""}}'>{{item.homeTeamScore}}</text> - <text class='{{item.homeTeamScore < item.guestTeamScore ? "color-3" : ""}}'>{{item.guestTeamScore}}</text>
+              </text>
+              <image src="http://image.suning.cn/uimg/SDSP/team/{{item.guestTeamId}}.png" /><text space='nbsp'> {{item.guestTeamName}}</text>
+            </view>
+            <text class='gamehr-com'>{{item.competitionName}}</text>
+          </view>
+        </view>
+      </block>
+      <text class='subt lineh-3'>近期战绩</text>
+      <view class='king'>
+        <template is="history" data="{{teamLogo: matchData.baseinfo.home.teamLogo, teamName: matchData.baseinfo.home.teamName, list: history.hosthistory.list}}"></template>
+        <template is="history" data="{{teamLogo: matchData.baseinfo.guest.teamLogo, teamName: matchData.baseinfo.guest.teamName, list: history.guesthistory.list}}"></template>
+      </view>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>
+    <scroll-view scroll-y="{{true}}" style='height: {{swiperHeight1}}px'>
+      <view class='relative'>
+        <view class='{{item.isTripleImg ? "relative-news3" : "relative-news"}}' wx:for="{{relativeNews}}" wx:key="{{newsId}}" data-title='{{item.newsTitle}}' data-author='{{item.authorName}}' data-time='{{item.createTime}}' data-content='{{item.content}}' data-news-id='{{item.newsId}}' data-comment-num='{{item.commentNum}}' data-cover='{{item.cover}}' catch:tap="onToNews">
+          <block wx:if="{{item.isTripleImg}}">
+            <view>{{item.newsTitle}}</view>
+            <image src="{{item}}" mode='aspectFill' wx:for="{{item.newsCovers}}" wx:key="{{index}}" />
+            <text>{{item.commentNum}}评论</text>
+          </block>
+          <block wx:else>
+            <image src="{{item.cover}}" mode='aspectFill' />
+            <view class='relative-news-right'>
+              <view>{{item.newsTitle}}</view>
+              <text>{{item.commentNum}}评论</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </scroll-view>
+  </swiper-item>
+</swiper>

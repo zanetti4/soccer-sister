@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "比赛",
+  "usingComponents": {
+    "only-refresh": "../../common/components/onlyRefresh/onlyRefresh"
+  }
+}

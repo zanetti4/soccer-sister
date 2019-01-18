@@ -1,0 +1,82 @@
+.allReply {
+  font-weight: 700;
+  line-height: 2.5;
+  padding-left: 20rpx;
+  border-bottom: solid 1px #D6D6D6;
+  margin-bottom: 20rpx;
+}
+.allReplyWrap {
+  padding: 0 20rpx;
+}
+.comeach {
+  border-bottom: solid 1px #D6D6D6;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+}
+.comeach:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.comeach-top {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+.comeach-top image {
+  flex: 1 0 0;
+  width: 70rpx;
+  height: 70rpx;
+}
+.comeach-top-cen {
+  flex: 7 0 0;
+  color: #999;
+  font-size: 22rpx;
+  padding-left: 10rpx;
+}
+.comeach-top-cen text {
+  display: block;
+  color: #F2708C;
+}
+.comeach-top-like {
+  flex: 1 0 0;
+  color: #999;
+  font-size: 22rpx;
+  text-align: right;
+}
+.comeach-top-like i {
+  color: #3F5A93;
+  font-size: 32rpx;
+  margin-left: 5rpx;
+}
+.comeach-pics {
+  margin-top: 10rpx;
+  display: block;
+  width: 500rpx;
+}
+.comeach-reply {
+  display: inline-block;
+  font-size: 22rpx;
+  background-color: #F4F4F4;
+  color: #F4587A;
+  line-height: 2;
+  padding: 0 20rpx;
+  margin-top: 10rpx;
+}
+/* 评论文章 */
+.comArti {
+  padding: 20rpx;
+}
+.icon-icon-test:before {
+  content: "\e65c";
+}
+.separate {
+  height: 20rpx;
+  background-color: #F4F4F4;
+}
+/* 全部回复 */
+.end {
+  color: #999;
+  font-size: 22rpx;
+  text-align: center;
+  background-color: #F4F4F4;
+  line-height: 2.5;
+}

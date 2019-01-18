@@ -1,0 +1,38 @@
+<!--client/pages/singleCom/single-com.wxml-->
+<view class='comArti'>
+  <view class='comeach-top'>
+    <image src='{{comArti.userheadPic}}' mode='aspectFit' />
+    <view class='comeach-top-cen'>
+      <text>{{comArti.userNickName}}</text>
+      {{comArti.createTime}}
+    </view>
+    <view class='comeach-top-like'>
+      {{comArti.likeNum}}<i class="iconfont icon-icon-test"></i>
+    </view>
+  </view>
+  <view>
+    <text decode='{{true}}'>{{comArti.commContent}}</text>
+  </view>
+  <com-img com-list="{{comArti.commImgList}}"></com-img>
+</view>
+<view class='separate'></view>
+<view class='allReply'>全部回复（{{replyNum}}）</view>
+<view class='allReplyWrap'>
+  <view class='comeach' wx:for="{{replies}}" wx:key="{{commId}}">
+    <view class='comeach-top'>
+      <image src='{{item.userheadPic}}' mode='aspectFit' />
+      <view class='comeach-top-cen'>
+        <text>{{item.userNickName}}</text>
+        {{item.createTime}}
+      </view>
+      <view class='comeach-top-like'>
+        {{item.likeNum}}<i class="iconfont icon-icon-test"></i>
+      </view>
+    </view>
+    <view>
+      <text decode='{{true}}'>{{item.commContent}}</text>
+    </view>
+    <com-img com-list="{{item.commImgList}}"></com-img>
+  </view>
+</view>
+<view class='end'>没人可换了……</view>

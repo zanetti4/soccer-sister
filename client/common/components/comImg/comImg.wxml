@@ -1,0 +1,2 @@
+<!--common/components/comImg/comImg.wxml-->
+<image class='comeach-pics' mode='widthFix' wx:if="{{item.imgUrl}}" wx:for="{{comList}}" wx:key="{{imgUrl}}" src='{{item.imgUrl}}' data-index='{{index}}' catch:tap="onPreviewPic" />

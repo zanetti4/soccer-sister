@@ -1,0 +1,4 @@
+<!--common/components/onlyRefresh/onlyRefresh.wxml-->
+<i class="iconfont icon-loading" catch:tap="onRefresh" animation="{{animation}}"></i>
+<!-- 基础库低于 1.6.0 -->
+<audio id='goal' src='http://fjlt.sc.chinaz.com/Files/DownLoad/sound1/201507/6161.wav' binderror='onAudioError' class='d-n'></audio>

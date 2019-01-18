@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "回复",
+  "usingComponents": {
+    "com-img": "../../common/components/comImg/comImg"
+  }
+}

@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<wxs src="../../utils/tool.wxs" module="tool"></wxs>
+
+<refresh catch:regainData="onRegain"></refresh>
+<swiper indicator-dots="{{true}}" indicator-active-color='#F4587A' autoplay='{{true}}' interval='{{4000}}' class='slide {{liveList.length ? "" : "mb-20r"}}'>
+  <block wx:for="{{ads}}" wx:key="{{advId}}">
+    <swiper-item>
+      <image src="{{item.advPcImgUrl}}" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class='notice' wx:if="{{liveList.length}}">
+  <view class='notice-col {{liveList.length === 1 ? "notice-one" : ""}}' wx:for="{{liveList}}" wx:key="{{matchInfo.matchId}}" data-section-id='{{item.sectionInfo.id}}' data-title='{{item.sectionInfo.title}}' data-match-id='{{item.matchInfo.matchId}}' catch:tap='onToMatch'>
+    <view class='notice-col-up'>
+      <text class='notice-col-up-left'>{{item.cataTitle}}</text>
+      <text class='notice-col-up-right'>预告</text>
+    </view>
+    <view class='notice-col-down'>
+      <view class='notice-col-down-left'>
+        <view>
+          <image src="{{item.matchInfo.homeTeam.logo}}" /> {{item.matchInfo.homeTeam.title}}
+        </view>
+        <view>
+          <image src="{{item.matchInfo.guestTeam.logo}}" /> {{item.matchInfo.guestTeam.title}}
+        </view>
+      </view>
+      <view class='notice-col-down-right'>
+        {{item.relativeDate}}
+        <text>{{tool.createMatchTime(item.matchInfo.matchDatetime)}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='news' wx:for="{{newsList}}" wx:key="{{url}}">
+  <image src="{{item.img}}" mode='aspectFill' />
+  <view class='news-right'>
+    <text class='news-right-tit'>{{item.title}}</text>
+    <view>
+      <text class='news-right-time'>{{item.time}}</text>
+      <text class='news-right-source'>来自 {{item.origin}}</text>
+    </view>
+  </view>
+</view>
+<text class='infinite' wx:if="{{isShowInfinity}}">{{infinity}}</text>

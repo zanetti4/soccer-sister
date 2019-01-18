@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "评论",
+  "usingComponents": {
+    "com-img": "../../common/components/comImg/comImg"
+  }
+}

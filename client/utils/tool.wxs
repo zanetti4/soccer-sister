@@ -1,0 +1,22 @@
+//不支持 es6
+//生成比赛时间（01:55）
+function createMatchTime(matchDatetime){
+  var time = matchDatetime.substring(11, 16);
+
+  return time;
+};
+
+//生成比赛日期（12月16日）
+function createMatchDate(matchDatetime){
+  if (matchDatetime){
+    var aMatchDate = matchDatetime.split(' ')[0].split('-');
+    var matchDate = aMatchDate[1] + '月' + aMatchDate[2] + '日';
+
+    return matchDate;
+  }
+};
+
+module.exports = {
+  createMatchTime: createMatchTime,
+  createMatchDate: createMatchDate
+};

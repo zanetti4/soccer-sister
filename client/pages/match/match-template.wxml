@@ -1,0 +1,82 @@
+<template name="kingTeam">
+  <view class='king-team'>
+    <view class='king-team-logo'>
+      <image src='{{teamLogo}}' />
+      <view></view>
+    </view>
+    <view class='king-team-players'>
+      <view class='king-team-players-each' wx:for="{{kings}}" wx:key="{{index}}">
+        <view class='king-team-players-each-avatar'>
+          <text wx:if="{{item.playerNum}}">{{item.playerNum}}号{{item.positionName}}</text>
+          <image src='{{item.playerPic ? item.playerPic : "../../common/img/portrait.png"}}' />
+        </view>
+        {{item.playerName}}
+        <text class='king-team-players-each-info'>
+          <block wx:if="{{item.field}}">场均{{item.field}}</block> <block wx:if="{{item.ranking}}">排名{{item.ranking}}</block>
+        </text>
+      </view>
+    </view>
+  </view>
+</template>
+<template name="history">
+  <view class="achieve">
+    <view class='achievet'>
+      <image src='{{teamLogo}}' /><text space='nbsp'> {{teamName}}</text>
+    </view>
+    <view class='gamehr' wx:for="{{list}}" wx:key="{{matchDate}}">
+      <text class='achievel'>
+        <text class='{{item.resultCode === 3 ? "color-b24" : ""}} {{item.resultCode === 0 ? "color-440" : ""}}'>{{item.result}}</text>{{item.matchDate}}
+      </text>
+      <view class='achievec'>
+        {{item.homeTeamName}}
+        <text class='gamehr-game-scores'>
+          <text class='{{item.homeTeamScore > item.guestTeamScore ? "color-3" : ""}}'>{{item.homeTeamScore}}</text> - <text class='{{item.homeTeamScore < item.guestTeamScore ? "color-3" : ""}}'>{{item.guestTeamScore}}</text>
+        </text>
+        {{item.guestTeamName}}
+      </view>
+      <text class='gamehr-com'>{{item.competitionName}}</text>
+    </view>
+  </view>
+</template>
+<template name="homeData">
+  <view class='dataContrast-item-player'>
+    <block wx:if="{{homeData.length}}">
+      <view class='dataContrast-item-player-1' wx:for="{{homeData}}" wx:key="{{index}}">
+        <view class='dataContrast-item-player-words'>
+          {{item.playerName}}
+          <view wx:if="{{item.playerNum}}">{{item.playerNum}}号</view>
+        </view>
+        <image src='{{item.playerpic}}' mode='aspectFit' binderror='onPortraitError' data-index='{{index}}' data-stat='{{homeData}}' />
+        <text>{{item.num}}</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class='dataContrast-item-player-1'>
+        <view class='dataContrast-item-player-words'></view>
+        <image src='../../common/img/portrait.png' mode='aspectFit' />
+        <text>0</text>
+      </view>
+    </block>
+  </view>
+</template>
+<template name="guestData">
+  <view class='dataContrast-item-player'>
+    <block wx:if="{{guestData.length}}">
+      <view class='dataContrast-item-player-1' wx:for="{{guestData}}" wx:key="{{index}}">
+        <text>{{item.num}}</text>
+        <image src='{{item.playerpic}}' mode='aspectFit' binderror='onPortraitError' data-index='{{index}}' data-stat='{{guestData}}' />
+        <view class='dataContrast-item-player-words dataContrast-item-player-wordsGuest'>
+          {{item.playerName}}
+          <view wx:if="{{item.playerNum}}">{{item.playerNum}}号</view>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class='dataContrast-item-player-1'>
+        <text>0</text>
+        <image src='../../common/img/portrait.png' mode='aspectFit' />
+        <view class='dataContrast-item-player-words dataContrast-item-player-wordsGuest'></view>
+      </view>
+    </block>
+  </view>
+</template>

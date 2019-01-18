@@ -1,0 +1,6 @@
+<template name="radar">
+  <view class="radar">
+    <canvas class="canvas" canvas-id="radarCanvas" wx:if="{{homeShoot}}" />
+    <i></i><text space='nbsp'> {{home}}</text><i class="radar-black"></i><text space='nbsp'> {{guest}}</text>
+  </view>
+</template>

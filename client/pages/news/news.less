@@ -1,0 +1,222 @@
+@import "../../wxParse/wxParse.wxss";
+
+page {
+	padding: 20rpx 20rpx 80rpx;
+	width: auto;
+	height: 100%;
+	box-sizing: border-box;
+	overflow-y: hidden;
+}
+.container {
+	height: 100%;
+}
+
+/* 文章 */
+.title {
+	font-size: 44rpx;
+	font-weight: 700;
+}
+.info {
+	border-bottom: solid 1px #D6D6D6;
+	color: #999;
+	line-height: 3;
+	font-size: 22rpx;
+	text {
+		margin-right: 20rpx;
+		color: #F2708C;
+	}
+}
+.content {
+	padding-top: 20rpx;
+	font-size: 28rpx;
+	line-height: 1.8;
+}
+
+.wxParse-p {
+	text-indent: 2em;
+	margin-bottom: 20rpx;
+}
+
+.content-video {
+	width: 710rpx;
+	height: 437rpx;
+	overflow: visible;
+}
+.content-txt {.wxParse-p;}
+
+/* 评论 */
+.comtit {
+	display: block;
+	text-align: center;
+	font: 700 26rpx~'/'1.8 "微软雅黑";
+}
+.comsub {
+	width: 375rpx;
+	margin: 0 auto 20rpx;
+	text-align: center;
+	background: url(data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/7gAOQWRvYmUAZMAAAAAB/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wAARCAABAAEDAREAAhEBAxEB/8QASgABAAAAAAAAAAAAAAAAAAAACgEBAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAAAAAAAAAAABEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AVgD/2Q==) repeat-x left center;
+	text {
+		color: #BBB;
+		display: inline-block;
+		background-color: #FAFAFA;
+		padding: 0 20rpx;
+		font-size: 20rpx;
+	}
+}
+.comeach {
+	border-bottom: solid 1px #D6D6D6;
+	margin-bottom: 20rpx;
+	padding-bottom: 20rpx;
+}
+.comeach-top {
+	display: flex;
+	margin-bottom: 10rpx;
+	image {
+		@lenght: 70rpx;
+
+		flex: 1 0 0;
+		width: @lenght;
+		height: @lenght;
+	}
+}
+.comeach-top-cen {
+	flex: 7 0 0;
+	color: #999;
+	font-size: 22rpx;
+	padding-left: 10rpx;
+	text {
+		display: block;
+		color: #F2708C;
+	}
+}
+.comeach-top-like {
+	flex: 1 0 0;
+	color: #999;
+	font-size: 22rpx;
+	text-align: right;
+	i {
+		color: #3F5A93;
+		font-size: 32rpx;
+		margin-left: 5rpx;
+	}
+}
+.icon-icon-test:before { content: "\e65c"; }
+.comeach-pics {
+	margin-top: 10rpx;
+	display: block;
+	width: 500rpx;
+}
+.comeach-reply {
+	display: inline-block;
+	font-size: 22rpx;
+	background-color: #F4F4F4;
+	color: #F4587A;
+	line-height: 2;
+	padding: 0 20rpx;
+	margin-top: 10rpx;
+}
+.commore {
+	display: block;
+	text-align: center;
+	color: #999;
+	line-height: 2;
+	i {
+		font-size: 40rpx;
+		margin-right: 10rpx;
+		vertical-align: middle;
+		position: relative;
+		z-index: 0;
+		text {
+			position: absolute;
+			z-index: 10;
+			left: -25rpx;
+			top: -10rpx;
+			color: #F2708C;
+			background-color: #FAFAFA;
+			font-size: 20rpx;
+			line-height: 1.5;
+			width: 50rpx;
+		}
+	}
+}
+.icon-pinglun:before { content: "\e618"; }
+
+/* 底部分享 */
+.bottomIcon {
+	color: #F2708C;
+	margin-right: 10rpx;
+	font-size: 44rpx;
+	vertical-align: middle;
+}
+
+.share {
+	position: fixed;
+	z-index: 50;
+	bottom: 0;
+	left: 0;
+	padding: 5rpx;
+	background-color: white;
+	display: flex;
+	box-sizing: border-box;
+	width: 750rpx;
+	button {
+		flex: 1 0 0;
+		padding: 0;
+		font-size: 24rpx;
+		line-height: 1.5;
+		color: #333;
+		background-color: transparent;
+		&::after {
+			border-radius: 0;
+			-webkit-border-radius: 0;
+			border: none;
+		}
+		i {.bottomIcon;}
+	}
+	view {
+		flex: 1 0 0;
+		text-align: center;
+		i {.bottomIcon;}
+	}
+}
+.icon-weixin:before { content: "\e615"; }
+.icon-friends:before { content: "\e644"; }
+
+/* 分享图片 */
+.mask {
+	background-color: rgba(0, 0, 0, .6);
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	width: 750rpx;
+	height: 100vh;
+	canvas {
+		width: 600rpx;
+		margin: 0 auto 40rpx;
+		&.mask-drawing {background: #FAFAFA url(data:image/png;base64,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) no-repeat center;}
+	}
+}
+.mask-deal {
+	text-align: center;
+	text {
+		@radius: 20px;
+
+		display: inline-block;
+		background-color: #F2708C;
+		color: white;
+		font-size: 26rpx;
+		line-height: 2;
+		padding: 0 30rpx;
+		border-radius: @radius;
+		-webkit-border-radius: @radius;
+	}
+	view {
+		padding-top: 20rpx;
+		i {
+			font-size: 50rpx;
+			color: rgba(255, 255, 255, .8);
+		}
+	}
+}
+.icon-quxiao:before { content: "\e65d"; }

@@ -1,0 +1,35 @@
+<!--matchList.wxml-->
+<wxs src="../../utils/tool.wxs" module="tool"></wxs>
+
+<!-- 基础库低于 1.6.0 -->
+<audio id='goal' src='http://fjlt.sc.chinaz.com/Files/DownLoad/sound1/201507/6161.wav' binderror='onAudioError' class='d-n'></audio>
+<view class='sound' wx:if="{{hasPlaying}}">
+  进球提示音<switch color='#F2708C' checked bindchange='onSound' />
+</view>
+<only-refresh catch:regainMatchList="onRefreshMatchList" catch:hasPlaying="onMatchStart" page-timer="{{liveScore}}" has-goal-sound="{{hasGoalSound}}"></only-refresh>
+<view style='padding-top: {{hasPlaying ? soundHeight : 0}}'>
+  <block wx:for="{{matchList}}" wx:key="{{index}}">
+    <text class='date'>{{item[0].matchInfo.relativeDate}}</text>
+    <view class='top-con {{item.matchInfo.goal ? "top-goal" : ""}}' wx:for="{{item}}" wx:key="{{matchInfo.matchId}}" catch:tap="onToMatch" data-section-id='{{item.sectionInfo.id}}' data-title='{{item.sectionInfo.matchTit}}' data-match-id='{{item.matchInfo.matchId}}'>
+      <view class='top-con-team'>
+        <image src='{{item.matchInfo.homeTeam.logo}}' />
+        <view>{{item.matchInfo.homeTeam.title}}</view>
+      </view>
+      <view class='top-con-cen'>
+        <text class='top-con-cen-tit'>{{item.sectionInfo.matchTit}}</text><text class='color-08c' wx:if="{{item.matchInfo.status === '1' && item.matchInfo.periodStr}}" space='nbsp'> ({{item.matchInfo.playTimeStr ? item.matchInfo.playTimeStr : item.matchInfo.periodStr}})</text>
+        <view class='top-con-cen-line'></view>
+        <block wx:if="{{item.matchInfo.status !== '1'}}">{{tool.createMatchTime(item.matchInfo.matchDatetime)}}</block>
+        <view class='top-con-cen-scores {{item.matchInfo.status === "1" ? "top-con-cen-lives" : ""}}' wx:if="{{item.matchInfo.status !== '0'}}">
+          <text class='top-con-cen-scores-num'>{{item.matchInfo.homeTeam.score}}</text>
+          <text class='top-con-cen-scores-colon'>:</text>
+          <text class='top-con-cen-scores-num'>{{item.matchInfo.guestTeam.score}}</text>
+        </view>
+        <view class='centerTxt' wx:else>VS</view>
+      </view>
+      <view class='top-con-team'>
+        <image src='{{item.matchInfo.guestTeam.logo}}' />
+        <view>{{item.matchInfo.guestTeam.title}}</view>
+      </view>
+    </view>
+  </block>
+</view>

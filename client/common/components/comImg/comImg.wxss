@@ -1,0 +1,5 @@
+.comeach-pics {
+  margin-top: 10rpx;
+  display: block;
+  width: 500rpx;
+}

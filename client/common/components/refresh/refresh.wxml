@@ -1,0 +1,3 @@
+<!--common/components/refresh/refresh.wxml-->
+<!-- <i class="iconfont icon-loading" catch:tap="onBackTop"></i> -->
+<i class="iconfont icon-jiantoushangsheng" catch:tap="onBackTop"></i>

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "com-img": "../../common/components/comImg/comImg"
+  }
+}

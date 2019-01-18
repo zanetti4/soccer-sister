@@ -1,0 +1,64 @@
+<!--client/pages/news/news.wxml-->
+<wxs src="../../utils/tool.wxs" module="tool"></wxs>
+<import src="../../wxParse/wxParse.wxml" />
+
+<scroll-view class='container' scroll-y="{{!isShowShare}}">
+  <view class='title'>{{title}}</view>
+  <view class='info'>
+    <text>{{author}}</text>{{tool.createMatchDate(time) + ' ' + tool.createMatchTime(time)}}
+  </view>
+  <view class='content'>
+    <block wx:if="{{isHtml}}">
+      <template is="wxParse" data="{{wxParseData: content.nodes}}" />
+    </block>
+    <block wx:else>
+      <view class='content-txt'>{{content}}</view>
+    </block>
+  </view>
+  <view wx:if="{{commentNum !== '0'}}">
+    <text class='comtit'>精彩评论</text>
+    <view class='comsub'>
+      <text>COMMENTS</text>
+    </view>
+    <view class='comeach' wx:for="{{goodComs}}" wx:key="{{commId}}">
+      <view class='comeach-top'>
+        <image src='{{item.userheadPic}}' mode='aspectFit' />
+        <view class='comeach-top-cen'>
+          <text>{{item.userNickName}}</text>
+          {{item.createTime}}
+        </view>
+        <view class='comeach-top-like'>
+          {{item.likeNum}}<i class="iconfont icon-icon-test"></i>
+        </view>
+      </view>
+      <view>
+        <text decode='{{true}}'>{{item.commContent}}</text>
+      </view>
+      <com-img com-list="{{item.commImgList}}"></com-img>
+      <text class='comeach-reply' wx:if="{{item.replyNum}}" catch:tap="onToSingleCom" data-com-id='{{item.commId}}'>共{{item.replyNum}}条回复 ></text>
+    </view>
+    <view class='commore' catch:tap="onToAllComs">
+      <i class="iconfont icon-pinglun">
+        <text>{{commentNum}}</text>
+      </i>
+      查看更多评论 >
+    </view>
+  </view>
+</scroll-view>
+<view class='mask' wx:if="{{isShowShare}}">
+  <canvas canvas-id="shareCanvas" id='shareCanvas' class='{{isDrawing ? "mask-drawing" : ""}}' style='height: {{canvasH}}px'></canvas>
+  <view class='mask-deal'>
+    <text catch:tap="onSaveInAlbum">保存到相册</text>
+    <view>
+      <i class="iconfont icon-quxiao" catch:tap="onCancelSharePic"></i>
+    </view>
+  </view>
+</view>
+<view class='share'>
+  <button open-type='share'>
+    <i class="iconfont icon-weixin"></i>分享给朋友
+  </button>
+  <view catch:tap="onCreateSharePic">
+    <i class="iconfont icon-friends"></i>生成分享图片
+  </view>
+</view>

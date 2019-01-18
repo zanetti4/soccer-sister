@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/matchList/matchList",
+    "pages/match/match",
+    "pages/news/news",
+    "pages/singleCom/singleCom",
+    "pages/allComs/allComs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F2708C",
+    "navigationBarTitleText": "懂球妹",
+    "navigationBarTextStyle": "white"
+  },
+  "debug": false,
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "common/img/home.png",
+        "selectedIconPath": "common/img/home-active.png"
+      },
+      {
+        "pagePath": "pages/matchList/matchList",
+        "text": "比赛",
+        "iconPath": "common/img/match.png",
+        "selectedIconPath": "common/img/match-active.png"
+      }
+    ],
+    "color": "#444",
+    "selectedColor": "#F2708C",
+    "backgroundColor": "#FFF",
+    "borderStyle": "white"
+  }
+}

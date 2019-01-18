@@ -1,0 +1,20 @@
+.radar {
+    text-align: center;
+    canvas {
+    	width: 650rpx;
+	    height: 500rpx;
+	    margin: 0 auto 20rpx;
+    }
+    i {
+    	@length: 20rpx;
+
+    	width: @length;
+    	height: @length;
+    	display: inline-block;
+    	background-color: rgb(187, 179, 62);
+    	&.radar-black {
+    		background-color: black;
+    		margin-left: 20rpx;
+    	}
+    }
+}

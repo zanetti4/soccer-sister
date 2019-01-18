@@ -1,0 +1,114 @@
+/* 焦点图 */
+.slideHeight {
+  height: 350rpx;
+}
+.slide {
+  height: 350rpx;
+}
+.slide image {
+  display: block;
+  width: 750rpx;
+  height: 350rpx;
+}
+/* 比赛预告 */
+.flexBb {
+  border-bottom: solid 1px #D6D6D6;
+  display: flex;
+}
+.notice {
+  margin-bottom: 20rpx;
+  border-bottom: solid 1px #D6D6D6;
+  display: flex;
+}
+.notice-col {
+  flex: 1 0 0;
+  padding: 0 20rpx;
+}
+.notice-col:first-child {
+  border-right: solid 1px #D6D6D6;
+}
+.notice-one {
+  border-right: none;
+}
+.notice-col-up {
+  border-bottom: solid 1px #D6D6D6;
+  display: flex;
+  color: #999;
+  line-height: 2;
+  align-items: center;
+}
+.notice-col-up-right {
+  font-size: 20rpx;
+  flex: 1 0 0;
+}
+.notice-col-up-left {
+  flex: 7 0 0;
+}
+.notice-col-down {
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  padding: 10rpx 0;
+}
+.notice-col-down-right {
+  flex: 1 0 0;
+  text-align: center;
+}
+.notice-col-down-right text {
+  display: block;
+}
+.notice-col-down-left {
+  flex: 6 0 0;
+}
+.notice-col-down-left image {
+  width: 35rpx;
+  height: 35rpx;
+  vertical-align: bottom;
+}
+.notice-col-down-left view:first-child {
+  margin-bottom: 10rpx;
+}
+/* 新闻 */
+.news {
+  border-bottom: solid 1px #D6D6D6;
+  display: flex;
+  padding: 0 20rpx 20rpx;
+  margin-bottom: 20rpx;
+}
+.news image {
+  flex: 1 0 0;
+  width: 275rpx;
+  height: 157rpx;
+}
+.littleGray {
+  color: #999;
+  font-size: 22rpx;
+}
+.news-right {
+  flex: 2 0 0;
+  padding-left: 20rpx;
+}
+.news-right view {
+  display: flex;
+  color: #999;
+  font-size: 22rpx;
+}
+.news-right-tit {
+  display: block;
+  font-size: 26rpx;
+  min-height: 125rpx;
+}
+.news-right-time {
+  flex: 1 0 0;
+}
+.news-right-source {
+  flex: 4 0 0;
+  text-align: right;
+}
+.infinite {
+  text-align: center;
+  display: block;
+  padding-bottom: 20rpx;
+  color: #999;
+  font-size: 22rpx;
+}
