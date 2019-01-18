@@ -17,6 +17,143 @@ wxss-cli: 小程序中将less编译成wxss。
 - matchList: 比赛列表页，可通过底部 *tabBar* 到达此页，展示从昨天开始的10天比赛概览，日期标题的相对日期显示“昨天、今天、明天或星期”，默认定位到第一场未结束的比赛（正在进行或未开始）。对于未开始的比赛，概览中显示比赛开始时间。对于已结束的比赛，还会显示最终比分。如果当前有正在进行的比赛，则显示当前比分和实时比赛时间，顶部会显示进球提示音的开关。每分钟自动更新一次数据，也可以通过点击右下角的更新图标手动刷新，获取数据时图标有旋转效果。当有进球发生时，默认播放提示音，该场比赛显示特殊的背景，直到下次更新数据没有进球时消失。点击每场比赛能跳转到比赛页。
 
 ## 项目结构
+``` bash
+│  project.config.json // 项目配置文件
+│  README.md // 开发文档
+│  tree.txt // 项目结构
+│  
+├─client // 客户端代码
+│  │  app.js // 注册小程序
+│  │  app.json // 小程序配置
+│  │  app.less // 小程序样式，可应用于每一个页面
+│  │  app.wxss
+│  │  package-lock.json // 用以记录当前状态下实际安装的各个npm package的具体来源和版本号
+│  │  package.json // 定义了项目所需要的各种模块,以及项目的配置信息
+│  │  
+│  ├─common // 通用文件
+│  │  ├─components // 组件
+│  │  │  ├─comImg // 评论图片
+│  │  │  │      comImg.js
+│  │  │  │      comImg.json // 注册组件
+│  │  │  │      comImg.less // 组件样式
+│  │  │  │      comImg.wxml // 组件结构
+│  │  │  │      comImg.wxss
+│  │  │  │      
+│  │  │  ├─onlyRefresh // tabBar:比赛 刷新
+│  │  │  │      onlyRefresh.js
+│  │  │  │      onlyRefresh.json
+│  │  │  │      onlyRefresh.less
+│  │  │  │      onlyRefresh.wxml
+│  │  │  │      onlyRefresh.wxss
+│  │  │  │      
+│  │  │  ├─radar // 雷达图
+│  │  │  │      .DS_Store
+│  │  │  │      radar.js
+│  │  │  │      radar.less
+│  │  │  │      radar.wxml
+│  │  │  │      radar.wxss
+│  │  │  │      
+│  │  │  └─refresh // tabBar:首页 刷新及回顶部
+│  │  │          refresh.js
+│  │  │          refresh.json
+│  │  │          refresh.less
+│  │  │          refresh.wxml
+│  │  │          refresh.wxss
+│  │  │          
+│  │  ├─img // 本地图片
+│  │  │      fail.png
+│  │  │      home-active.png
+│  │  │      home.png
+│  │  │      match-active.png
+│  │  │      match.png
+│  │  │      portrait.png
+│  │  │      
+│  │  ├─style // 通用样式
+│  │  │      comment.less // 评论
+│  │  │      comment.wxss
+│  │  │      iconfont.less // 图标
+│  │  │      iconfont.wxss
+│  │  │      
+│  │  └─voice // 音频
+│  │          enHeng.wav // 进球提示音
+│  │          
+│  ├─miniprogram_npm // 小程序安装的依赖（没用到）
+│  │  └─classnames
+│  │          index.js
+│  │          index.js.map
+│  │          
+│  ├─node_modules // 安装的模块（没用到）
+│  │  └─classnames
+│  │          bind.js
+│  │          dedupe.js
+│  │          HISTORY.md
+│  │          index.js
+│  │          LICENSE
+│  │          package.json
+│  │          README.md
+│  │          
+│  ├─pages // 页面
+│  │  ├─allComs // 全部评论
+│  │  │      allComs.js
+│  │  │      allComs.json
+│  │  │      allComs.less
+│  │  │      allComs.wxml
+│  │  │      allComs.wxss
+│  │  │      
+│  │  ├─index // 首页
+│  │  │      index.js
+│  │  │      index.json
+│  │  │      index.less
+│  │  │      index.wxml
+│  │  │      index.wxss
+│  │  │      
+│  │  ├─match // 比赛页
+│  │  │      match-template.wxml // 页面中用到的模板
+│  │  │      match.js
+│  │  │      match.json
+│  │  │      match.less
+│  │  │      match.wxml
+│  │  │      match.wxss
+│  │  │      
+│  │  ├─matchList // tabBar:比赛
+│  │  │      matchList.js
+│  │  │      matchList.json
+│  │  │      matchList.less
+│  │  │      matchList.wxml
+│  │  │      matchList.wxss
+│  │  │      
+│  │  ├─news // 相关新闻
+│  │  │      news.js
+│  │  │      news.json
+│  │  │      news.less
+│  │  │      news.wxml
+│  │  │      news.wxss
+│  │  │      
+│  │  └─singleCom // 单一评论页
+│  │          singleCom.js
+│  │          singleCom.json
+│  │          singleCom.less
+│  │          singleCom.wxml
+│  │          singleCom.wxss
+│  │          
+│  ├─utils // 工具
+│  │      tool.wxs
+│  │      util.js
+│  │      watch.js // 监听数据
+│  │      
+│  └─wxParse // 解析 html/markdown
+│      │  html2json.js
+│      │  htmlparser.js
+│      │  showdown.js
+│      │  wxDiscode.js
+│      │  wxParse.js
+│      │  wxParse.wxml
+│      │  wxParse.wxss
+│      │  
+│      └─emojis
+│              
+└─serve-demo // 服务端代码
+```
 
 ## 心得体会&技术难点
 > 制作过程中我主要参考了**懂球帝、pptv、粉色书城**，并加入了自己的理解调整功能。感觉微信小程序的代码是 *vue* 和 *react* 的结合体，可能更偏向于 vue。在发请求时不会因为跨域而报错，这点很便利。这是我第一次在一个完整的项目中使用 *less*，确实比 *css* 方便。另外对于弹性盒模型，使用的比以前更加熟练了。微信方面提供一些常用的组件和接口，不过有的接口存在 bug，比如：*wx.pageScrollTo* 在执行时，固定定位的回顶部图标会消失，直到页面到达顶部才又显示……相信随着基础库的更新，可以变得更加完善。
