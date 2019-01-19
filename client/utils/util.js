@@ -200,12 +200,12 @@ function createSingleCom(comList, comId){
 //生成当地日期字符串（2019-01-05）
 function createLocaleDateStr(oDate) {
   let sDay = oDate.toLocaleDateString();
-  let aDay = sDay.split('/');
+  let nums = transformDate(sDay);
+  let year = nums.substr(0, 4);
+  let month = nums.substr(4, 2);
+  let date = nums.slice(-2);
 
-  aDay[1] = addZero(aDay[1]);
-  aDay[2] = addZero(aDay[2]);
-  sDay = aDay.join('-');
-  return sDay;
+  return `${year}-${month}-${date}`;
 };
 
 //判断相对天或星期
@@ -253,9 +253,9 @@ function sendRequest(url, method = 'GET', data = {}, header = {}){
   let promise = new Promise(function (resolve, reject) {
     wx.request({
       url,
-      data: data,
-      method: method,
-      header: header,
+      data,
+      method,
+      header,
       success: resolve,
       fail: reject
     })

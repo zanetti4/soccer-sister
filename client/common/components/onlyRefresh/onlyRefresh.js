@@ -230,5 +230,8 @@ Component({
       this.animation.rotate(360 * n).step();
       this.setData({ animation: this.animation.export() });
     }
+  },
+  detached(){
+    console.log('刷新组件实例被从页面节点树移除');
   }
 })

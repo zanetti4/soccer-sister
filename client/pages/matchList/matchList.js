@@ -16,14 +16,28 @@ Page({
     firstGoal: true,
     soundHeight: '0'
   },
-  onLoad: function () {
-    this.initial();
-  },
+  onLoad: function () {},
   onShow: function(){
     this.setData({isShowPage: true});
+
+    let { liveScore } = this.data;
+
+    if(!liveScore){
+      //没开启定时器
+      this.setData({ isLoad: true });
+      this.initial();
+    }
   },
   onHide: function(){
     this.setData({ isShowPage: false });
+    
+    let {hasGoalSound, liveScore} = this.data;
+
+    if(!hasGoalSound && liveScore){
+      //关闭了进球提示音且开启了定时器，那么没必要每分钟发请求了
+      clearInterval(liveScore);
+      this.setData({ liveScore: null });
+    }
   },
   //设置页面初始化位置
   setLoca(selector) {
@@ -82,8 +96,9 @@ Page({
         //添加日期标题、每场比赛的标题
         for (let date in list) {
           if (list[date][0]){
-            //每天的第一场比赛存在
-            let { matchDatetime } = list[date][0].matchInfo;
+            //这天有比赛，从最后一场比赛获取日期，因为第一场比赛可能是昨天开始的
+            let indexLast = list[date].length - 1;
+            let { matchDatetime } = list[date][indexLast].matchInfo;
             let relativeDate = matchDatetime.substr(0, 11);
             let time = matchDatetime.substr(0, 10);
             let relativeChar = util.relativeDay(time);
@@ -239,6 +254,7 @@ Page({
 
           if (wx.pageScrollTo) {
             //基础库1.4.0开始支持
+            this.setData({ heights: [] });
             this.setLoca('.date');
             this.setLoca('.top-con');
           }
