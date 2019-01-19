@@ -14,16 +14,17 @@ Page({
     hasGoalSound: true,
     audioCtx: {},
     firstGoal: true,
-    soundHeight: '0'
+    soundHeight: '0',
+    refreshLive: null
   },
   onLoad: function () {},
   onShow: function(){
     this.setData({isShowPage: true});
 
-    let { liveScore } = this.data;
+    let { liveScore, refreshLive } = this.data;
 
-    if(!liveScore){
-      //没开启定时器
+    if (!liveScore && !refreshLive){
+      //页面和刷新组件没开启定时器
       this.setData({ isLoad: true });
       this.initial();
     }
@@ -295,6 +296,12 @@ Page({
     });
 
     return arr;
+  },
+  //刷新组件定时器 id
+  onRefreshLive(ev){
+    let { detail } = ev;
+
+    this.setData({ refreshLive: detail });
   },
   //点击刷新按钮，传过来的数据
   onRefreshMatchList(ev){

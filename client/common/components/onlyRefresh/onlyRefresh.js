@@ -181,6 +181,7 @@ Component({
 
               this.setData({ liveScore });
               this.triggerEvent('hasPlaying', true);
+              this.triggerEvent('refreshLive', liveScore);
             }
           } else {
             //没有正在进行的比赛了
@@ -188,6 +189,7 @@ Component({
             clearInterval(liveScore);
             this.setData({ liveScore: null });
             this.triggerEvent('hasPlaying', false);
+            this.triggerEvent('refreshLive', null);
           }
 
           matchList = Object.values(list);
