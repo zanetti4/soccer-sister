@@ -110,6 +110,7 @@ Page({
             });
           }
         };
+
         //查看是否有正在进行的比赛
         let today = new Date().toLocaleDateString();
 
@@ -273,6 +274,9 @@ Page({
           //正在浏览比赛列表页面
           wx.hideLoading();
         }
+      },
+      fail: (error) => {
+        console.log(error);
       }
     });
   },
