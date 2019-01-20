@@ -218,7 +218,7 @@
   vertical-align: middle;
 }
 .gamehr-game {
-  flex: 6 0 0;
+  flex: 5 0 0;
   text-align: center;
 }
 .gamehr-game image {

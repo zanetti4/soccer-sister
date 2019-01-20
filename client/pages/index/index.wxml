@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <wxs src="../../utils/tool.wxs" module="tool"></wxs>
 
-<refresh catch:regainData="onRegain"></refresh>
+<refresh catch:regainData="onRegain" catch:refreshLiveList="onRegainLive"></refresh>
 <swiper indicator-dots="{{true}}" indicator-active-color='#F4587A' autoplay='{{true}}' interval='{{4000}}' class='slide {{liveList.length ? "" : "mb-20r"}}'>
   <block wx:for="{{ads}}" wx:key="{{advId}}">
     <swiper-item>

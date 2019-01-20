@@ -108,11 +108,13 @@ Page({
 
               if (futureLen === 0) {
                 //今天的余下比赛为零
-                let liveList = tomMatch1.slice(0, 2);
+                if (tomMatch1.length){
+                  //明天有符合规则的比赛
+                  let liveList = tomMatch1.slice(0, 2);
 
-                addRelativeDate(liveList, '明天');
-
-                this.setData({ liveList });
+                  addRelativeDate(liveList, '明天');
+                  this.setData({ liveList });
+                }
               } else {
                 //今天的余下比赛为1场
                 if (tomMatch1.length === 0) {
@@ -204,7 +206,7 @@ Page({
       });
     }
   },
-  //刷新数据
+  //刷新新闻列表数据
   onRegain(ev){
     let {detail} = ev;
 
@@ -212,6 +214,12 @@ Page({
       newsList: detail,
       curNewsList: detail
     });
+  },
+  //刷新比赛预告
+  onRegainLive(ev){
+    let { detail } = ev;
+
+    this.setData({liveList: detail});
   },
   //到比赛预告页
   onToMatch(event){

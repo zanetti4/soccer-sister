@@ -14,17 +14,16 @@ Page({
     hasGoalSound: true,
     audioCtx: {},
     firstGoal: true,
-    soundHeight: '0',
-    refreshLive: null
+    soundHeight: '0'
   },
   onLoad: function () {},
   onShow: function(){
     this.setData({isShowPage: true});
 
-    let { liveScore, refreshLive } = this.data;
+    let { liveScore } = this.data;
 
-    if (!liveScore && !refreshLive){
-      //页面和刷新组件没开启定时器
+    if (!liveScore){
+      //页面没开启定时器
       this.setData({ isLoad: true });
       this.initial();
     }
@@ -217,12 +216,16 @@ Page({
         } else {
           //没有正在进行的比赛了
           console.log('没有正在进行的比赛了');
-          clearInterval(liveScore);
 
-          this.setData({
-            liveScore: null,
-            hasPlaying: false
-          });
+          if(liveScore){
+            //开启了定时器
+            clearInterval(liveScore);
+
+            this.setData({
+              liveScore: null,
+              hasPlaying: false
+            });
+          }
         }
 
         if (isLoad){
@@ -297,28 +300,43 @@ Page({
 
     return arr;
   },
-  //刷新组件定时器 id
-  onRefreshLive(ev){
+  //刷新组件通知页面，开启定时器
+  onStartTimer(ev){
     let { detail } = ev;
 
-    this.setData({ refreshLive: detail });
+    if(detail){
+      //开启定时器
+      let liveScore = setInterval(() => {
+        this.setData({ isLoad: false });
+        this.initial();
+      }, 60000);
+
+      this.setData({ 
+        liveScore,
+        hasPlaying: detail
+      });
+
+      this.getHeightSound();
+    }else{
+      //如果开着定时器则关闭
+      let {liveScore} = this.data;
+
+      if(liveScore){
+        //开启了定时器
+        clearInterval(liveScore);
+
+        this.setData({ 
+          liveScore: null,
+          hasPlaying: detail
+        });
+      }
+    }
   },
   //点击刷新按钮，传过来的数据
   onRefreshMatchList(ev){
     let { detail } = ev;
 
     this.setData({matchList: detail});
-  },
-  //点击刷新按钮，可能有比赛开始了
-  onMatchStart(ev){
-    let { detail } = ev;
-
-    this.setData({ hasPlaying: detail });
-
-    if(detail){
-      //有比赛正在进行
-      this.getHeightSound();
-    }
   },
   //获取顶部进球提示音的高度
   getHeightSound(){

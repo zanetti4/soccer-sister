@@ -6,7 +6,7 @@
 <view class='sound' wx:if="{{hasPlaying}}">
   进球提示音<switch color='#F2708C' checked bindchange='onSound' />
 </view>
-<only-refresh catch:regainMatchList="onRefreshMatchList" catch:hasPlaying="onMatchStart" catch:refreshLive="onRefreshLive" page-timer="{{liveScore}}" has-goal-sound="{{hasGoalSound}}"></only-refresh>
+<only-refresh catch:regainMatchList="onRefreshMatchList" catch:startTimer="onStartTimer" page-timer="{{liveScore}}" has-goal-sound="{{hasGoalSound}}"></only-refresh>
 <view style='padding-top: {{hasPlaying ? soundHeight : 0}}'>
   <block wx:for="{{matchList}}" wx:key="{{index}}">
     <text class='date'>{{item[0].matchInfo.relativeDate}}</text>

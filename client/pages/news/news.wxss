@@ -457,7 +457,6 @@ page {
 }
 .mask canvas {
   width: 600rpx;
-  background-color: #FAFAFA;
   margin: 0 auto 40rpx;
 }
 .mask canvas.mask-drawing {

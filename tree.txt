@@ -60,21 +60,6 @@ D:.
 ©¦  ©¦  ©¸©¤voice
 ©¦  ©¦          enHeng.wav
 ©¦  ©¦          
-©¦  ©À©¤miniprogram_npm
-©¦  ©¦  ©¸©¤classnames
-©¦  ©¦          index.js
-©¦  ©¦          index.js.map
-©¦  ©¦          
-©¦  ©À©¤node_modules
-©¦  ©¦  ©¸©¤classnames
-©¦  ©¦          bind.js
-©¦  ©¦          dedupe.js
-©¦  ©¦          HISTORY.md
-©¦  ©¦          index.js
-©¦  ©¦          LICENSE
-©¦  ©¦          package.json
-©¦  ©¦          README.md
-©¦  ©¦          
 ©¦  ©À©¤pages
 ©¦  ©¦  ©À©¤allComs
 ©¦  ©¦  ©¦      allComs.js

@@ -22,7 +22,6 @@ Component({
   data: {
     animation: {},
     n: 0,
-    liveScore: null,
     matchList: [],
     firstGoal: true,
     audioCtx: {}
@@ -37,11 +36,11 @@ Component({
       this.initial();
     },
     //请求直播列表并处理数据
-    initial(){
+    initial() {
       //获取比赛直播列表
       this.animation = wx.createAnimation({});
 
-      let {n} = this.data;
+      let { n } = this.data;
 
       n++;
       this.circle(n);
@@ -50,7 +49,7 @@ Component({
       let timerLoading = setInterval(() => {
         n++;
         this.circle(n);
-        this.setData({n});
+        this.setData({ n });
       }, 400);
 
       wx.request({
@@ -99,7 +98,7 @@ Component({
             return match.matchInfo.status === '1';
           });
 
-          let { liveScore, matchList } = this.data;
+          let { matchList } = this.data;
 
           if (hasPlayingToday || hasPlayingYester) {
             //有正在进行的比赛
@@ -171,25 +170,15 @@ Component({
             this.addGoalProp(list[yesterday], matchIdsGoal);
             this.addGoalProp(list[today], matchIdsGoal);
 
-            if (!liveScore && !this.data.pageTimer) {
-              //组件和页面都没有开过定时器
-              console.log('开启刷新组件定时器');
-
-              liveScore = setInterval(() => {
-                this.initial();
-              }, 60000);
-
-              this.setData({ liveScore });
-              this.triggerEvent('hasPlaying', true);
-              this.triggerEvent('refreshLive', liveScore);
+            if (!this.data.pageTimer) {
+              //页面没有开过定时器
+              console.log('通知页面开启定时器');
+              this.triggerEvent('startTimer', true);
             }
           } else {
             //没有正在进行的比赛了
-            console.log('关闭刷新组件定时器，没有正在进行的比赛了');
-            clearInterval(liveScore);
-            this.setData({ liveScore: null });
-            this.triggerEvent('hasPlaying', false);
-            this.triggerEvent('refreshLive', null);
+            console.log('点击刷新组件，没有正在进行的比赛了');
+            this.triggerEvent('startTimer', false);
           }
 
           matchList = Object.values(list);
