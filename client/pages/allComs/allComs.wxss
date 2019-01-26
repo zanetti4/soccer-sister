@@ -25,6 +25,8 @@
   flex: 1 0 0;
   width: 70rpx;
   height: 70rpx;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 .comeach-top-cen {
   flex: 7 0 0;

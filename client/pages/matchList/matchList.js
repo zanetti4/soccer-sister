@@ -90,7 +90,7 @@ Page({
         //筛选足球
         for (let date in list) {
           list[date] = list[date].filter(item => {
-            return item.type === '1' && item.cataTitle !== 'WCBA' && item.cataTitle !== 'KHL' && item.cataTitle !== 'SRHL' && item.cataTitle !== 'NBL';
+            return item.type === '1' && item.cataTitle !== 'WCBA' && item.cataTitle !== 'KHL' && item.cataTitle !== 'SRHL' && item.cataTitle !== 'NBL' && item.cataTitle !== 'CWHL';
           });
         };
         //添加日期标题、每场比赛的标题
@@ -99,11 +99,15 @@ Page({
             //这天有比赛，从最后一场比赛获取日期，因为第一场比赛可能是昨天开始的
             let indexLast = list[date].length - 1;
             let { matchDatetime } = list[date][indexLast].matchInfo;
-            let relativeDate = matchDatetime.substr(0, 11);
-            let time = matchDatetime.substr(0, 10);
-            let relativeChar = util.relativeDay(time);
 
-            list[date][0].matchInfo.relativeDate = relativeDate + relativeChar;
+            if(matchDatetime){
+              //matchDatetime 存在
+              let relativeDate = matchDatetime.substr(0, 11);
+              let time = matchDatetime.substr(0, 10);
+              let relativeChar = util.relativeDay(time);
+
+              list[date][0].matchInfo.relativeDate = relativeDate + relativeChar;
+            }
 
             list[date].forEach(match => {
               match.sectionInfo.matchTit = match.sectionInfo.title.split(' ')[0];
