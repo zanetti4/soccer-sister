@@ -76,7 +76,7 @@ Page({
             if (dayMatches){
               //存在该数组
               let matchFilter = dayMatches.filter(item => {
-                return item.type === '1' && item.cataTitle !== 'WCBA' && item.cataTitle !== 'KHL' && item.cataTitle !== 'SRHL' && item.cataTitle !== 'NBL';
+                return item.type === '1' && item.cataTitle !== 'WCBA' && item.cataTitle !== 'KHL' && item.cataTitle !== 'SRHL' && item.cataTitle !== 'NBL' && item.cataTitle !== 'CWHL';
               });
 
               return matchFilter;

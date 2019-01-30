@@ -226,11 +226,10 @@ Page({
             //开启了定时器
             clearInterval(liveScore);
 
-            this.setData({
-              liveScore: null,
-              hasPlaying: false
-            });
+            this.setData({liveScore: null});
           }
+
+          this.setData({hasPlaying: false});
         }
 
         if (isLoad){
