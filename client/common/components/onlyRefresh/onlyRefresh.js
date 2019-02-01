@@ -59,7 +59,7 @@ Component({
           //筛选足球
           for (let date in list) {
             list[date] = list[date].filter(item => {
-              return item.type === '1' && item.cataTitle !== 'WCBA' && item.cataTitle !== 'KHL' && item.cataTitle !== 'SRHL' && item.cataTitle !== 'NBL';
+              return item.type === '1' && item.cataTitle !== 'WCBA' && item.cataTitle !== 'KHL' && item.cataTitle !== 'SRHL' && item.cataTitle !== 'NBL' && item.cataTitle !== 'CWHL';
             });
           };
           //添加日期标题、每场比赛的标题
