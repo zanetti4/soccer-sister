@@ -223,12 +223,10 @@ Page({
   },
   //到比赛预告页
   onToMatch(event){
-    let { sectionId, title, matchId } = event.currentTarget.dataset;
-    
-    title = title.split(' ')[0];
+    let { matchId } = event.currentTarget.dataset;
 
     wx.navigateTo({
-      url: `/pages/match/match?sectionId=${sectionId}&title=${title}&matchId=${matchId}`
+      url: `/pages/match/match?matchId=${matchId}`
     });
   }
 })

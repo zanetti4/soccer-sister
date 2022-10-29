@@ -109,8 +109,13 @@ Page({
               list[date][0].matchInfo.relativeDate = relativeDate + relativeChar;
             }
 
+            /* console.log('list[date]:');
+            console.log(list[date]); */
+
             list[date].forEach(match => {
-              match.sectionInfo.matchTit = match.sectionInfo.title.split(' ')[0];
+              const head = match.matchInfo.head;
+
+              match.matchInfo.matchTit = head.h1 + head.h2;
             });
           }
         };
@@ -182,7 +187,7 @@ Page({
                       //基础库 1.6.0 开始支持
                       let audioCtx = wx.createInnerAudioContext();
 
-                      audioCtx.src = 'http://fjlt.sc.chinaz.com/Files/DownLoad/sound1/201507/6161.wav';
+                      audioCtx.src = 'https://img.tukuppt.com/newpreview_music/00/10/98/5d819f83b7e2061542.mp3';
                       audioCtx.autoplay = true;
                       this.setData({ audioCtx });
                     } else {

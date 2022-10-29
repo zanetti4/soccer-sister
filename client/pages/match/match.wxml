@@ -18,7 +18,7 @@
         剩余 <text>{{day}}</text> 天 <text>{{hour}}</text> 小时 <text>{{minute}}</text> 分 <text>{{second}}</text> 秒
       </view>
       <!-- 基础库低于 1.6.0 -->
-      <audio id='goal' src='http://fjlt.sc.chinaz.com/Files/DownLoad/sound1/201507/6161.wav' binderror='onAudioError' class='d-n'></audio>
+      <audio id='goal' src='https://img.tukuppt.com/newpreview_music/00/10/98/5d819f83b7e2061542.mp3' binderror='onAudioError' class='d-n'></audio>
       <view class='top-con-cen-sound' wx:if="{{status === '1'}}">
         进球提示音<switch color='#F2708C' checked bindchange='onSound' />
       </view>

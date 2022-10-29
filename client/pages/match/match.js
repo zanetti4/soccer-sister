@@ -73,17 +73,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
+    /* wx.showLoading({
       title: '思考人生……',
-    });
+    }); */
 
     watch.setWatcher(this);
 
-    let { sectionId, title, matchId } = options;
+    let { matchId } = options;
 
-    this.setData({title, matchId});
+    this.setData({matchId});
     //获取比赛数据
-    this.getMatchData(sectionId);
+    // this.getMatchData(sectionId);
     //获取球队对比-数据王
     wx.request({
       url: `http://m.ppsport.com/pc/pclive/getPlayerAndTeamStat.htm?matchId=${matchId}`,
@@ -158,83 +158,6 @@ Page({
           //调用雷达图组件
           this.radar.draw([homeShoot, homePlug, homeCorner, homeSeason, homeScore, homeBall], [guestShoot, guestPlug, guestCorner, guestSeason, guestScore, guestBall]);
         }
-      }
-    });
-    //获取交战记录和最近战绩
-    wx.request({
-      url: `http://sportlive.suning.com/slsp-web/cms/sectionDetailInfo.do?sectionid=${sectionId}`,
-      success: ({data}) => {
-        let reqSuc = this.data.reqSuc + 1;
-
-        this.setData({reqSuc});
-        //两队交战的主队比分转换为数字，便于 wxml 中进行比分比较
-        let gameHL = data.data.gamehistory.list;
-
-        if (gameHL){
-          //双方有交战记录
-          data.data.gamehistory.list.forEach(item => {
-            item.homeTeamScore = Number(item.homeTeamScore);
-          });
-        }
-
-        let { homeId, guestId } = data.data.baseinfo;
-        //给球队近期比赛添加结果关键字
-        let addResult = (list, teamId) => {
-          list.forEach(item => {
-            for (let attr in item) {
-              if (item[attr] === teamId) {
-                //确定球队是之前比赛中的主队还是客队
-                let gh = attr.replace('TeamId', '');
-                let iTeamScore = Number(item[`${gh}TeamScore`]);
-                //将该队比分转为数字进行存储，便于 wxml 中进行比较
-                item[`${gh}TeamScore`] = iTeamScore;
-
-                if (gh === 'guest') {
-                  //是客队
-                  let iHomeScore = Number(item.homeTeamScore);
-
-                  if (iTeamScore > iHomeScore) {
-                    //胜
-                    item.result = '胜';
-                    item.resultCode = 3;
-                  } else if (iTeamScore === iHomeScore) {
-                    //平
-                    item.result = '平';
-                    item.resultCode = 1;
-                  } else {
-                    //负
-                    item.result = '负';
-                    item.resultCode = 0;
-                  }
-                } else {
-                  //是主队
-                  let iGuestScore = Number(item.guestTeamScore);
-
-                  if (iTeamScore > iGuestScore) {
-                    //胜
-                    item.result = '胜';
-                    item.resultCode = 3;
-                  } else if (iTeamScore === iGuestScore) {
-                    //平
-                    item.result = '平';
-                    item.resultCode = 1;
-                  } else {
-                    //负
-                    item.result = '负';
-                    item.resultCode = 0;
-                  }
-                }
-              }
-            };
-          });
-        };
-
-        addResult(data.data.hosthistory.list, homeId);
-        addResult(data.data.guesthistory.list, guestId);
-
-        this.setData({
-          history: data.data
-        });
       }
     });
 
@@ -394,7 +317,7 @@ Page({
                         //基础库 1.6.0 开始支持
                         let audioCtx = wx.createInnerAudioContext();
 
-                        audioCtx.src = 'http://fjlt.sc.chinaz.com/Files/DownLoad/sound1/201507/6161.wav';
+                        audioCtx.src = 'https://img.tukuppt.com/newpreview_music/00/10/98/5d819f83b7e2061542.mp3';
                         audioCtx.autoplay = true;
                         that.setData({ audioCtx });
                       }else{
